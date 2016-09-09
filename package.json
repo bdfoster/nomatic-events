@@ -6,11 +6,13 @@
   "main": "index.js",
   "scripts": {
     "test": "env NODE_ENV=test mocha --reporter spec --recursive test/**/*",
-    "coverage": "istanbul cover --dir ./docs/coverage _mocha --recursive test/**/*"
+    "coverage": "istanbul cover --dir ./docs/coverage _mocha --recursive test/**/*",
+    "codeclimate-test-reporter": "codeclimate-test-reporter < ./docs/coverage/lcov.info"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "codeclimate-test-reporter": "^2.2.2"
   },
   "dependencies": {
     "async": "^2.0.1",
