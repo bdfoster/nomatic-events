@@ -12,7 +12,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.0.2",
-    "codeclimate-test-reporter": "^2.2.2"
+    "codeclimate-test-reporter": "^0.3.3",
+    "istanbul": "^0.4.5"
   },
   "dependencies": {
     "async": "^2.0.1",
