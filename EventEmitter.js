@@ -67,8 +67,8 @@ var EventEmitter = (function () {
      */
     EventEmitter.prototype.off = function (callback) {
         var keepGoing = true;
-        lodash.each(this.listeners, function (value, index, array) {
-            if (value.callback == callback) {
+        lodash.each(this.listeners, function (listener, index, array) {
+            if (listener.callback === callback) {
                 delete array[index];
                 keepGoing = false;
             }
