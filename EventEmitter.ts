@@ -80,8 +80,8 @@ class EventEmitter {
     public off(callback: ListenerInterface) {
         var keepGoing = true;
 
-        lodash.each(this.listeners, function (value: Listener, index, array) {
-            if (value.callback == callback) {
+        lodash.each(this.listeners, function (listener: Listener, index, array) {
+            if (listener.callback === callback) {
                 delete array[index];
                 keepGoing = false;
             }
