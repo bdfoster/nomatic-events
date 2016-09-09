@@ -31,7 +31,7 @@ lib-cov
 .grunt
 .lock-wscript
 build/Release
-node_modules
 jspm_packages
 .npm
 .node_repl_history
+/node_modules/
