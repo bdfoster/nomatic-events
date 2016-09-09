@@ -56,8 +56,8 @@ describe('EventEmitter', function() {
 
     describe('#pop()', function() {
         it('should remove the EventListener object from the EventEmitter', function() {
+            expect(emitter.listeners.length).to.equal(1);
             expect(emitter.pop(listener)).to.equal(true);
-            expect(emitter.listeners.length).to.equal(0);
         });
     });
 });
