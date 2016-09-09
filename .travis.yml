@@ -11,5 +11,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+    code_climate:
+      repo_token: e12fd8e03896426373067dfb39b00e2f36f3dccb4436fea8c8991107918724fc
 after_success:
   - npm run coveralls
