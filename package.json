@@ -1,0 +1,23 @@
+{
+  "name": "nomatic-events",
+  "version": "0.0.0",
+  "author": "Brian D. Foster <bdfoster89@gmail.com> (https://github.com/bdfoster)",
+  "description": "Namespaced events module used with the Nomatic Automation Hub",
+  "main": "index.js",
+  "scripts": {
+    "test": "env NODE_ENV=test mocha --reporter spec",
+    "unit_tests": "npm run test -- --recursive tests/unit",
+    "acceptance_tests": "npm run test -- --recursive tests/acceptance",
+    "tests": "npm run test -- --recursive tests/**/*",
+    "cover": "istanbul cover _mocha --recursive tests/**/*",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "lodash": "^4.15.0"
+  }
+}
