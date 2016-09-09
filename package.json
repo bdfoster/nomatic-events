@@ -6,10 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "env NODE_ENV=test mocha --reporter spec",
-    "unit tests": "npm run test -- --recursive tests/unit",
-    "acceptance tests": "npm run test -- --recursive tests/acceptance",
-    "tests": "npm run test -- --recursive tests/**/*",
-    "coverage": "istanbul cover --dir ./docs/coverage _mocha --recursive tests/**/*",
+    "unit tests": "npm run test -- --recursive test/unit",
+    "acceptance tests": "npm run test -- --recursive test/acceptance",
+    "tests": "npm run test -- --recursive test/**/*",
+    "coverage": "istanbul cover --dir ./docs/coverage _mocha --recursive test/**/*",
     "coveralls": "npm run cover -- --report lcovonly && cat ./docs/coverage/lcov.info | coveralls"
   },
   "devDependencies": {
