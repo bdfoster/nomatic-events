@@ -22,6 +22,7 @@ ratings:
     - "**.module"
     - "**.ts"
 exclude_paths:
+  - dist/
   - test/
   - typings/
   - docs/
