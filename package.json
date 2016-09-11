@@ -13,8 +13,8 @@
     "url": "https://github.com/bdfoster/nomatic-events/issues"
   },
   "scripts": {
-    "test": "grunt && env NODE_ENV=test mocha --reporter spec --recursive test/**/*",
-    "coverage": "grunt && istanbul cover --dir ./docs/coverage _mocha --recursive test/**/*",
+    "test": "env NODE_ENV=test mocha --reporter spec --recursive test/**/*",
+    "coverage": "istanbul cover --dir ./docs/coverage _mocha --recursive test/**/*",
     "codeclimate-test-reporter": "codeclimate-test-reporter < ./docs/coverage/lcov.info"
   },
   "devDependencies": {
