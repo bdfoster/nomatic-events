@@ -16,9 +16,7 @@ describe('EventEmitter', function() {
         it('should create a new EventEmitter object', function() {
             //noinspection BadExpressionStatementJS,JSUnresolvedVariable
             expect(emitter).to.have.keys([
-                'listeners',
-                'separator',
-                'maxListeners'
+                'listeners'
             ]);
         });
     });
@@ -37,7 +35,7 @@ describe('EventEmitter', function() {
         });
 
         it('should return an executable EventListener type', function () {
-            listener.execute(true);
+            listener.execute('test', true);
             //noinspection BadExpressionStatementJS,JSUnresolvedVariable
             expect(listenerResult).to.equal(true);
         });
@@ -45,8 +43,8 @@ describe('EventEmitter', function() {
 
     describe('#emit()', function() {
         it('should execute listener', function() {
-            expect(EventEmitter.listeners.length).to.equal(1);
-            expect(EventEmitter.emit('test', [1, 2, 3, 4])).to.equal(true);
+            expect(emitter.listeners.length).to.equal(1);
+            expect(emitter.emit('test', [1, 2, 3, 4])).to.equal(true);
             expect(listenerResult).to.deep.equal([1, 2, 3, 4]);
         });
     });
