@@ -7,13 +7,13 @@ export default class EventListener {
     private emitter: any;
 
     constructor(namespace: any, callback: FunctionConstructor, once: boolean = false, emitter: EventEmitter) {
-        if (!( namespace instanceof RegExp || typeof namespace !== 'string' )) {
+        if (!( namespace instanceof RegExp || typeof namespace === 'string' )) {
             throw new Error("'namespace' param must be of RegExp or String type")
         } else {
             this.namespace = namespace;
         }
 
-        if (callback instanceof Function) {
+        if (!(callback instanceof Function)) {
             throw new Error("'callback' param must be a function or method");
         } else {
             this.callback = callback;
