@@ -1,32 +1,44 @@
 "use strict";
-var Listener = (function () {
-    function Listener(namespace, callback, once, emitter) {
-        this.namespace = namespace;
-        if (typeof callback !== 'function') {
-            throw new Error("'callback' param must be a function");
+var EventListener = (function () {
+    function EventListener(namespace, callback, once, emitter) {
+        if (once === void 0) { once = false; }
+        if (!(namespace instanceof RegExp || namespace instanceof String)) {
+            throw new Error("'namespace' param must be of RegExp or String type");
         }
-        this.callback = callback;
+        else {
+            this.namespace = namespace;
+        }
+        if (callback instanceof Function) {
+            throw new Error("'callback' param must be a function or method");
+        }
+        else {
+            this.callback = callback;
+        }
         this.once = once;
         this.emitter = emitter;
     }
-    Listener.prototype.execute = function (data) {
-        this.callback(data, this.namespace);
+    EventListener.prototype.execute = function (namespace) {
+        var data = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            data[_i - 1] = arguments[_i];
+        }
+        this.callback.apply({ namespace: namespace }, data);
         if (this.once) {
             this.close();
         }
         return this;
     };
-    Listener.prototype.close = function () {
+    EventListener.prototype.close = function () {
         this.emitter.pop(this);
         return this;
     };
-    Listener.prototype.open = function (once) {
+    EventListener.prototype.open = function (once) {
         if (once === void 0) { once = false; }
         this.once = once;
         this.emitter.push(this);
         return this;
     };
-    return Listener;
+    return EventListener;
 }());
-module.exports = Listener;
+exports.EventListener = EventListener;
 //# sourceMappingURL=EventListener.js.map

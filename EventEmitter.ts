@@ -1,14 +1,10 @@
-import lodash = require("lodash");
-import async = require("async");
-import Listener = require("./EventListener");
+import {EventListener} from "./EventListener";
+import * as lodash from "lodash";
+import * as async from "async";
 
-type ListenerInterface = (data: any, namespace: string) => void;
-
-class EventEmitter {
-    private separator: string;
-    private listeners: Listener[];
+export class EventEmitter {
+    private listeners: EventListener[];
     private maxListeners: number;
-    private executeAsync: boolean;
 
     /**
      *
@@ -16,34 +12,14 @@ class EventEmitter {
      * @param maxListeners: The maximum number of Listener instances allowed per namespace. Default is 10. Set to 0
      *                      for unlimited (not recommended). This is a safety against memory leaks, and is not a hard
      *                      limit.
-     * @param separator: The string used to indicate the end of a namespace part and the beginning of the next part.
-     *                   By default, '.' is used, and 'test.namespace.1' would be a namespace with a depth of 3. Cannot
-     *                   have '*' in the string, which is used as a wildcard.
-     * @throws {Error}: 'separator' param cannot have wildcard character '*'
      */
-    constructor(maxListeners: number, separator: string) {
-        // If maxListeners is a negative value, treat as 0
+    constructor(maxListeners: number = 10) {
+        // If maxListeners is a negative value, treat as 0 (unlimited)
         if (maxListeners < 0) {
             this.maxListeners = 0;
-        } else {
-            this.maxListeners = maxListeners;
-        }
-
-        if (separator) {
-            // Check for existence of wildcard character, throw AssertionError if found
-            if (separator.indexOf("*") > 0) {
-                throw new Error("'separator' param cannot have wildcard character '*'");
-            }
-
-            this.separator = separator;
-
-        } else {
-            // Default separator used
-            this.separator = ".";
         }
 
         this.listeners = [];
-        this.maxListeners = maxListeners || 10;
     }
 
     /**
@@ -53,11 +29,10 @@ class EventEmitter {
      *                  type, but the namespace will be an array of strings with the index indicating the depth.
      * @param once: A boolean value indicating how many times the callback will be executed. A true value will
      *              unsubscribe the Listener automatically after the callback is executed once.
-     * @returns {Listener}: Used to manage the subscription status via `open` and `close` methods (see: `Listener`).
-     * @throws {AssertionError}: 'callback' param is not a function type
+     * @returns {EventListener}: Used to manage the subscription status via `open` and `close` methods.
      */
-    public on(namespace: string, callback: Function, once: boolean) {
-        var listener = new Listener(namespace, callback, once, this);
+    public on(namespace: string, callback: FunctionConstructor, once: boolean) {
+        var listener = new EventListener(namespace, callback, once, this);
         this.push(listener);
         return listener;
     }
@@ -77,10 +52,10 @@ class EventEmitter {
      * @param callback: The function already subscribed to the EventNamespace instance.
      * @returns {boolean}: A true value indicates a successful unsubscribe.
      */
-    public off(callback: ListenerInterface) {
+    public off(callback: Function) {
         var keepGoing = true;
 
-        lodash.each(this.listeners, function (listener: Listener, index, array) {
+        lodash.each(this.listeners, function (listener: EventListener, index, array) {
             if (listener.callback === callback) {
                 delete array[index];
                 keepGoing = false;
@@ -100,7 +75,7 @@ class EventEmitter {
      * Add a Listener instance to the EventNamespace instance. Called with `subscribe` method.
      * @param listener: A Listener instance to add to the EventNamespace instance.
      */
-    public push(listener: Listener) {
+    public push(listener: EventListener) {
         this.listeners.push(listener);
     }
 
@@ -109,10 +84,10 @@ class EventEmitter {
      * @param listener: A Listener instance to remove from the EventNamespace instance.
      * @returns {boolean}: A true value indicates a successful pop.
      */
-    public pop(listener: Listener) {
+    public pop(listener: EventListener) {
         var keepGoing = true;
 
-        lodash.each(this.listeners, function (value: Listener, index, array) {
+        lodash.each(this.listeners, function (value: EventListener, index, array) {
             if (value === listener) {
                 delete array[index];
                 keepGoing = false;
@@ -128,12 +103,19 @@ class EventEmitter {
         return true;
     }
 
-    public emit(namespace: string, data: any) {
+    public emit(namespace: string, ...data: any[]) {
+        if (typeof namespace !== 'string') {
+            throw new Error("'namespace' param must be of String type")
+        }
+
+        if (this.listeners.length == 0) {
+            return true;
+        }
+
         async.each(this.listeners, callMatchedListeners);
-        function callMatchedListeners(listener: Listener, callback) {
-            // TODO: Allow wildcards in listener.namespace
-            if (listener.namespace && namespace) {
-                listener.execute(data);
+        function callMatchedListeners(listener: EventListener, callback) {
+            if (listener.namespace && namespace.match(listener.namespace)) {
+                listener.execute(namespace, ...data);
             }
             callback(null);
         }
@@ -141,5 +123,3 @@ class EventEmitter {
         return true;
     }
 }
-
-export = EventEmitter;

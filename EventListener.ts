@@ -1,25 +1,32 @@
-import Emitter = require("./EventEmitter");
+import {EventEmitter} from "./EventEmitter";
 
-class Listener {
+export class EventListener {
     public namespace;
     public callback: Function;
     private once: boolean;
-    private emitter: Emitter;
+    private emitter: EventEmitter;
 
-    constructor(namespace: string, callback: Function, once: boolean, emitter: Emitter) {
-        this.namespace = namespace;
-
-        if (typeof callback !== 'function') {
-            throw new Error("'callback' param must be a function");
+    constructor(namespace: any, callback: Function, once: boolean = false, emitter: EventEmitter) {
+        if (!( namespace instanceof RegExp || namespace instanceof String )) {
+            throw new Error("'namespace' param must be of RegExp or String type")
+        } else {
+            this.namespace = namespace;
         }
-        this.callback = callback;
+
+        if (callback instanceof Function) {
+            throw new Error("'callback' param must be a function or method");
+        } else {
+            this.callback = callback;
+        }
+
         this.once = once;
         this.emitter = emitter;
 
     }
 
-    public execute(data: any) {
-        this.callback(data, this.namespace);
+    public execute(namespace: string, ...data: any[]) {
+
+        this.callback.apply({ namespace: namespace }, data);
 
         if (this.once) {
             this.close();
@@ -38,7 +45,4 @@ class Listener {
         this.emitter.push(this);
         return this;
     }
-
 }
-
-export = Listener;

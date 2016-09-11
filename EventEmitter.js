@@ -1,7 +1,7 @@
 "use strict";
+var EventListener = require("./EventListener");
 var lodash = require("lodash");
 var async = require("async");
-var Listener = require("./EventListener");
 var EventEmitter = (function () {
     /**
      *
@@ -9,32 +9,14 @@ var EventEmitter = (function () {
      * @param maxListeners: The maximum number of Listener instances allowed per namespace. Default is 10. Set to 0
      *                      for unlimited (not recommended). This is a safety against memory leaks, and is not a hard
      *                      limit.
-     * @param separator: The string used to indicate the end of a namespace part and the beginning of the next part.
-     *                   By default, '.' is used, and 'test.namespace.1' would be a namespace with a depth of 3. Cannot
-     *                   have '*' in the string, which is used as a wildcard.
-     * @throws {Error}: 'separator' param cannot have wildcard character '*'
      */
-    function EventEmitter(maxListeners, separator) {
-        // If maxListeners is a negative value, treat as 0
+    function EventEmitter(maxListeners) {
+        if (maxListeners === void 0) { maxListeners = 10; }
+        // If maxListeners is a negative value, treat as 0 (unlimited)
         if (maxListeners < 0) {
             this.maxListeners = 0;
         }
-        else {
-            this.maxListeners = maxListeners;
-        }
-        if (separator) {
-            // Check for existence of wildcard character, throw AssertionError if found
-            if (separator.indexOf("*") > 0) {
-                throw new Error("'separator' param cannot have wildcard character '*'");
-            }
-            this.separator = separator;
-        }
-        else {
-            // Default separator used
-            this.separator = ".";
-        }
         this.listeners = [];
-        this.maxListeners = maxListeners || 10;
     }
     /**
      * Subscribe a callable function to a namespace.
@@ -43,11 +25,10 @@ var EventEmitter = (function () {
      *                  type, but the namespace will be an array of strings with the index indicating the depth.
      * @param once: A boolean value indicating how many times the callback will be executed. A true value will
      *              unsubscribe the Listener automatically after the callback is executed once.
-     * @returns {Listener}: Used to manage the subscription status via `open` and `close` methods (see: `Listener`).
-     * @throws {AssertionError}: 'callback' param is not a function type
+     * @returns {EventListener}: Used to manage the subscription status via `open` and `close` methods.
      */
     EventEmitter.prototype.on = function (namespace, callback, once) {
-        var listener = new Listener(namespace, callback, once, this);
+        var listener = new EventListener.EventListener(namespace, callback, once, this);
         this.push(listener);
         return listener;
     };
@@ -105,12 +86,21 @@ var EventEmitter = (function () {
         }
         return true;
     };
-    EventEmitter.prototype.emit = function (namespace, data) {
+    EventEmitter.prototype.emit = function (namespace) {
+        var data = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            data[_i - 1] = arguments[_i];
+        }
+        if (typeof namespace !== 'string') {
+            throw new Error("'namespace' param must be of String type");
+        }
+        if (this.listeners.length == 0) {
+            return true;
+        }
         async.each(this.listeners, callMatchedListeners);
         function callMatchedListeners(listener, callback) {
-            // TODO: Allow wildcards in listener.namespace
-            if (listener.namespace && namespace) {
-                listener.execute(data);
+            if (listener.namespace && namespace.match(listener.namespace)) {
+                listener.execute.apply(listener, [namespace].concat(data));
             }
             callback(null);
         }
@@ -118,5 +108,5 @@ var EventEmitter = (function () {
     };
     return EventEmitter;
 }());
-module.exports = EventEmitter;
+exports.EventEmitter = EventEmitter;
 //# sourceMappingURL=EventEmitter.js.map
