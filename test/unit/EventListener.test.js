@@ -28,7 +28,7 @@ describe('EventListener', function() {
 
     describe('#execute', function() {
         it('should execute the callback given the event data', function() {
-            listener.execute(true);
+            listener.execute('test', true);
             expect(listenerResult).to.equal(true);
         })
     })

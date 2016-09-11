@@ -25,7 +25,7 @@ export default class EventListener {
     }
 
     public execute(namespace: string, ...data: any[]) {
-        if (this.namespace && namespace.match(this.namespace)) {
+        if (this.namespace.match(namespace)) {
             this.callback.apply(this, data);
 
 

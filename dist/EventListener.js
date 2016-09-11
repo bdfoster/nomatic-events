@@ -33,7 +33,7 @@ var EventListener = (function () {
     _createClass(EventListener, [{
         key: "execute",
         value: function execute(namespace) {
-            if (this.namespace && namespace.match(this.namespace)) {
+            if (this.namespace.match(namespace)) {
                 for (var _len = arguments.length, data = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
                     data[_key - 1] = arguments[_key];
                 }

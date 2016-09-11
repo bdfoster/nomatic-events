@@ -44,8 +44,8 @@ describe('EventEmitter', function() {
     describe('#emit()', function() {
         it('should execute listener', function() {
             expect(emitter.listeners.length).to.equal(1);
-            expect(emitter.emit('test', [1, 2, 3, 4])).to.equal(true);
-            expect(listenerResult).to.deep.equal([1, 2, 3, 4]);
+            expect(emitter.emit('test', 1234, 5678, 90)).to.equal(true);
+            expect(listenerResult).to.deep.equal([1234, 5678, 90]);
         });
     });
 
