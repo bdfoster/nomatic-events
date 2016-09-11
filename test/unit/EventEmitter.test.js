@@ -1,8 +1,5 @@
 var expect = require('chai').expect;
-var Emitter = require('../../EventEmitter');
-var beforeEach = require("mocha").beforeEach;
-var it = require("mocha").it;
-var describe = require("mocha").describe;
+var EventEmitter = require('../../dist/EventEmitter');
 
 describe('EventEmitter', function() {
     var emitter;
@@ -11,7 +8,7 @@ describe('EventEmitter', function() {
     var callback = function(data) { listenerResult = data; };
 
     beforeEach(function() {
-        emitter = new Emitter();
+        emitter = new EventEmitter();
         listener = emitter.on('test', callback, true);
     });
 
@@ -48,8 +45,8 @@ describe('EventEmitter', function() {
 
     describe('#emit()', function() {
         it('should execute listener', function() {
-            expect(emitter.listeners.length).to.equal(1);
-            expect(emitter.emit('test', [1, 2, 3, 4])).to.equal(true);
+            expect(EventEmitter.listeners.length).to.equal(1);
+            expect(EventEmitter.emit('test', [1, 2, 3, 4])).to.equal(true);
             expect(listenerResult).to.deep.equal([1, 2, 3, 4]);
         });
     });

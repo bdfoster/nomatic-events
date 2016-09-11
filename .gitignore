@@ -35,3 +35,10 @@ jspm_packages
 .npm
 .node_repl_history
 /node_modules/
+*~
+*#
+build/
+.tscache/
+.baseDir.ts
+tscommand*
+tmp/

@@ -1,13 +1,13 @@
-import {EventEmitter} from "./EventEmitter";
+import EventEmitter from "./EventEmitter";
 
-export class EventListener {
+export default class EventListener {
     public namespace;
     public callback: Function;
     private once: boolean;
-    private emitter: EventEmitter;
+    private emitter: any;
 
-    constructor(namespace: any, callback: Function, once: boolean = false, emitter: EventEmitter) {
-        if (!( namespace instanceof RegExp || namespace instanceof String )) {
+    constructor(namespace: any, callback: FunctionConstructor, once: boolean = false, emitter: EventEmitter) {
+        if (!( namespace instanceof RegExp || typeof namespace !== 'string' )) {
             throw new Error("'namespace' param must be of RegExp or String type")
         } else {
             this.namespace = namespace;
@@ -25,14 +25,18 @@ export class EventListener {
     }
 
     public execute(namespace: string, ...data: any[]) {
+        if (this.namespace && namespace.match(this.namespace)) {
+            this.callback.apply(this, data);
 
-        this.callback.apply({ namespace: namespace }, data);
 
-        if (this.once) {
-            this.close();
+            if (this.once) {
+                this.close();
+            }
+
+            return true;
         }
 
-        return this;
+        return false;
     }
 
     public close() {
