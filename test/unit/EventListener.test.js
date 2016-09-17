@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var EventListener = require('../../dist/EventListener');
+var EventListener = require('../../dist/index').EventListener;
 var beforeEach = require("mocha").beforeEach;
 var it = require("mocha").it;
 var describe = require("mocha").describe;

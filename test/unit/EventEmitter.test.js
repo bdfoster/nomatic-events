@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var EventEmitter = require('../../dist/EventEmitter');
+var EventEmitter = require('../../dist/index').EventEmitter;
 
 describe('EventEmitter', function() {
     var emitter;
