@@ -45,7 +45,9 @@ var EventEmitter = (function () {
 
     _createClass(EventEmitter, [{
         key: "on",
-        value: function on(namespace, callback, once) {
+        value: function on(namespace, callback) {
+            var once = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
             var listener = new _index.EventListener(namespace, callback, once, this);
             this.push(listener);
             return listener;

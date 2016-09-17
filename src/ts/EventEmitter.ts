@@ -29,7 +29,7 @@ export default class EventEmitter {
      *              unsubscribe the Listener automatically after the callback is executed once.
      * @returns {EventListener}: Used to manage the subscription status via `open` and `close` methods.
      */
-    public on(namespace: string, callback: FunctionConstructor, once: boolean) {
+    public on(namespace: string, callback: FunctionConstructor, once: boolean = false) {
         var listener = new EventListener(namespace, callback, once, this);
         this.push(listener);
         return listener;

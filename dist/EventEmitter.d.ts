@@ -19,7 +19,7 @@ export default class EventEmitter {
      *              unsubscribe the Listener automatically after the callback is executed once.
      * @returns {EventListener}: Used to manage the subscription status via `open` and `close` methods.
      */
-    on(namespace: string, callback: FunctionConstructor, once: boolean): EventListener;
+    on(namespace: string, callback: FunctionConstructor, once?: boolean): EventListener;
     /**
      * Subscribe a callable function to a namespace and only execute once. Alias of 'on' method with 'once' param set to
      * true.
