@@ -39,6 +39,7 @@ jspm_packages
 *#
 build/
 .tscache/
-.baseDir.ts
+src/.baseDir.ts
 tscommand*
 tmp/
+dist/

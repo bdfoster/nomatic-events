@@ -4,22 +4,29 @@ node_js:
 - '5'
 - '6'
 env:
-- CXX=g++-4.8
+  global:
+  - CXX=g++-4.8
+  - secure: bq90aSEZBgSSvfYNfx6m3uKzz7nbX9lWDLCZsThfEHzjYnG9XgySoPUpPaM4mOFtPMtWjwHemYDX3YmxvOLOEkYBzmZ8e3GAkf3f/J+9TIDE1WyKbbQPOkZjipKVUKyPZ1RwX4tt/j74/GQQNGdcVyDPT32mrNdd6BJvqYBcnrZ8CHS863kZXmx1gNvg4KVdR7ay83CtU2CJnYapwDfM/hjS6DGZxJkE1u71ZHTCQ5Zf6QJYflYg9act/PbnRytT6K8PoMDztkbzgwjMLjEKLDgHsNzCEilZThhGB3lNo8OrpmZJjRn0QWE0CYT7zrCNqnHXRRDSxY6gq47qab9h63j+GaGDfeRSVsY0h7V2Y2+F/KjmSsqJS5tCD7tA471YS/1Fg4PNqTfrZk+JZ0jdQwgtszX6ejuCawcGuXkoA0wFGAjHNchbA8DkLyOjIR0CmTdJH6AG/he9qCuc+hYyLzIqF7/6XNLYZxyyaqRpDpup/5E9MIIV1wihJkhd6NMP4RsOkX4SKh4Pj3MQRG8TU83GfM7sxxoDafziwKyIJ2OIlm1ZONv8ZEYEBW0PfKzIu0GSzZD527yZjOM/3LixC6S6Tki9Qwd8XKrc4SRdYt07DDXURcSgVtRT5qqmCKvH2Wdxbugmnipjlfnj1MSfQZkIjP6y9cW63N4yv78JAAw=
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-    code_climate:
-      repo_token: e12fd8e03896426373067dfb39b00e2f36f3dccb4436fea8c8991107918724fc
+  code_climate:
+    repo_token:
+      secure: AocTbVG210r/xQVGxo10HqMP8GZFVI2qswAQfjRwqh3RhmS7d3S+/MlEKzlkEdULuOtVwzACjJ6dh1loLBJdS9r5ptk9AQ28EDSoaXekvdYZFqJfZbRYIEtf0rP6vvx8/e8K2b9SQrxNVF0z4odi9yNuOt2jbLJfCRHrxojViRgL5CDowMMAWneP3rtKNKxh4YdahKVPo3S7RybUnaYejzcRc0OG/rpg+kHmD9a8AoOTOLgifyEwyL+R/aYTptzEwzlJyNG9NLHuxHGiHCKp7RadbgsYJiI/6RMaGvloijQVbh8kqPUW7k9LYv2g/YljxtbwI8824IPSQSjWdBhsWMs7dwUzNrWa48qC5D6f1RytPIgPBI+wK+tsh/4bCVnwj8zDm9Q9g3kTEpyv6AY6aOnQXHk7WD95D8gHXm5/rfS8/dFqFfXtW/abIkdW+EURYIBB7SSohj72EvF1KacUYCc6Pr5GtuXZ4O7OZwr5YN90ZOAZ5xrwEz7Rmk2TPQULbdMuVmZH/K/s3BgqM4ClUtONpiuv+MCdgGTOZ6uxJ4qmOIDnNqSuL+OSVoKwcGCmTh6nsF4bQDobpBVYmDQch5SzAQ3yziSqc4TiJMBhUbqMEhagG72EU+EmsvVyBJt+qCmUgN4i0Lixl7yUP8bOIsZPpxlPIgVQ9itZP9w2a0M=
 deploy:
+  skip_cleanup: true
   on:
     tags: true
+    branch: master
   api_key:
     secure: NpOwVo4xiaEsHlw21wHxNHPOEtEvRicwhdoKh84VBNlxc4+1H6EEIuWZwLw1dj6znpbPNXu3SC7c/PsnIUpqAQaSR+V9hMWL8lhSghTSqHhLrWKRVdtReO9i74mli03ICsCtvc6UBq92alJ9Hkwkb4BF0tUCcv6Nc1SOEb+ZtU8v5yL1P6iV5/03DTTsLyVhhFEyGP15jre08hUEFo1uMA41pdJxyAgLAZtK/kOk0pNkWNIqDH4IbyQkIDmh04naKYfweA3KzcWJiqqXheuIKFp01h9OykMtXxVBGpTTQt0Y4zcGWGKUvrsGeIosFSSK7DlEt5y5nOw43HG5PbVHjDB2OO8AjSmdCjk8qTynpUVUdAOy0LqzfV4n7SUvxOvcgY21XuJUnsFkfGspchJ7PRQhpLyDbWh7r+oweCxJD+WiEVe4hyftEdFMdsM9oCEYAqsdwFHSN5JV9P7EXtPvlBtN8OeeU1vmmHLKVDwLp/YoJ5djl6PFlEMieAqgtOC0Dd7Mji485vpSGfu8RJV/bLU+kfs9taA/5GRAo89YUiBmXQ0xRC7LkXF1Y0oEDIslMDuZVadpokxsfER4rQjhWpPZPKRUZMw0NwvE6UR94sp3sNdscEjS+MWoR4Ro7L0in06bfoaYN4/w6t+YVBNIdwrk4ktlvijCfqYExHC5a+A=
   email: bdfoster89@gmail.com
   provider: npm
+script:
+- tsc
+- npm run coveralls
 after_success:
-  - npm run coverage
-  - npm run codeclimate-test-reporter
+- npm run codeclimate-test-reporter

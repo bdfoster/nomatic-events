@@ -1,4 +1,4 @@
-declare var require;
+declare const require;
 export const lodash = require("lodash");
 export const async = require("async");
 
