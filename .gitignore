@@ -42,3 +42,4 @@ build/
 src/.baseDir.ts
 tscommand*
 tmp/
+dist/
