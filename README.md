@@ -7,10 +7,10 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/bdfoster/nomatic-events/badges/gpa.svg)](https://codeclimate.com/github/bdfoster/nomatic-events) 
 [![David dependencies](https://img.shields.io/david/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events)
 [![David devDependencies](https://img.shields.io/david/dev/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events?type=dev)
-
-Fast, asynchronous, and regex-enabled event framework for Node.js
+[![License](https://img.shields.io/github/license/bdfoster/nomatic-events.svg)](https://github.com/bdfoster/nomatic-events/blob/master/LICENSE)
 
 ## Installation
+
 You can install from NPM by doing:
 ```
 npm install --save nomatic-events
@@ -19,6 +19,7 @@ npm install --save nomatic-events
 ## Usage
 
 ### Basic
+
 ```
 var events = require("nomatic-events");
 var EventEmitter = events.EventEmitter;
