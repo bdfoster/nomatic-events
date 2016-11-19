@@ -16,7 +16,7 @@
     "test": "cross-env NODE_ENV=test mocha --recursive test/**/*.test.js",
     "coverage": "cross-env NODE_ENV=test istanbul cover node_modules/mocha/bin/_mocha -- --recursive test/**/*.test.js",
     "coveralls": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- --recursive test/**/*.test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js ",
-    "codeclimate-test-reporter": "codeclimate-test-reporter < ./docs/coverage/lcov.info"
+    "codeclimate-test-reporter": "codeclimate-test-reporter < ./coverage/lcov.info"
   },
   "engines": {
     "node": ">=4.0.0",
