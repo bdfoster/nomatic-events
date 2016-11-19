@@ -9,3 +9,9 @@
 [![David devDependencies](https://img.shields.io/david/dev/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events?type=dev)
 
 Fast, asynchronous, and regex-enabled event framework for Node.js
+
+## Installation
+You can install from NPM by doing:
+```
+npm install --save nomatic-events
+```
