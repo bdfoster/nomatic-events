@@ -1,4 +1,7 @@
-.idea/
-src/
-.gitignore
-.travis.yml
+/.idea/
+/node_modules/
+/.gitignore
+/test/
+/.codeclimate.yml
+/.travis.yml
+/src/
