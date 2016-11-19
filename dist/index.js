@@ -1,23 +1,8 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _interopRequire(obj) { return obj && obj.__esModule ? obj["default"] : obj; }
-
-var lodash = require("lodash");
-exports.lodash = lodash;
-var async = require("async");
-exports.async = async;
-
-var _EventEmitter = require("./EventEmitter");
-
-exports.EventEmitter = _interopRequire(_EventEmitter);
-
-var _EventListener = require("./EventListener");
-
-exports.EventListener = _interopRequire(_EventListener);
-
-//# sourceMappingURL=index.js.map
+exports.lodash = require("lodash");
+exports.async = require("async");
+var EventEmitter_1 = require("./EventEmitter");
+exports.EventEmitter = EventEmitter_1.default;
+var EventListener_1 = require("./EventListener");
+exports.EventListener = EventListener_1.default;
 //# sourceMappingURL=index.js.map
