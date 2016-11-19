@@ -5,3 +5,5 @@
 /.codeclimate.yml
 /.travis.yml
 /src/
+/coverage/
+/tsconfig.json
