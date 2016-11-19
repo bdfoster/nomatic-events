@@ -15,3 +15,19 @@ You can install from NPM by doing:
 ```
 npm install --save nomatic-events
 ```
+
+## Usage
+
+### Basic
+```
+var events = require("nomatic-events");
+var EventEmitter = events.EventEmitter;
+
+var emitter = new EventEmitter();
+
+emitter.on("incoming", function(data) {
+  console.log("data is now " + data); 
+});
+
+emitter.emit(42);
+```
