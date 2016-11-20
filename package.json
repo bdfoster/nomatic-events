@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/bdfoster/nomatic-events/issues"
   },
-  "runkitExampleFilename": "examples/tonic.js",
+  "runkitExampleFilename": "examples/runkit.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --recursive test/**/*.test.js",
     "coverage": "cross-env NODE_ENV=test istanbul cover node_modules/mocha/bin/_mocha -- --recursive test/**/*.test.js",
