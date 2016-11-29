@@ -59,9 +59,10 @@ export default class EventEmitter {
     }
 
     public emit(namespace: string, ...data: any[]) {
+        let self = this;
         each(this.listeners, function(listener: EventListener) {
             if (namespace.match(listener.namespace)) {
-                listener.execute(this, ...data);
+                listener.execute(self, ...data);
             }
         });
     }
