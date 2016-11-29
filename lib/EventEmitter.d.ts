@@ -6,5 +6,5 @@ export default class EventEmitter {
     on(namespace: any, callback: FunctionConstructor, once?: boolean): EventListener;
     push(listener: EventListener): void;
     pop(listener: EventListener): boolean;
-    emit(namespace: any, ...data: any[]): void;
+    emit(namespace: string, ...data: any[]): void;
 }

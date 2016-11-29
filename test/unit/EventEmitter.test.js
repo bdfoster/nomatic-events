@@ -9,7 +9,7 @@ describe('EventEmitter', function() {
 
     beforeEach(function() {
         emitter = new EventEmitter();
-        listener = emitter.on('test', callback, true);
+        listener = emitter.on(/test/i , callback, true);
     });
 
     describe('new', function() {
@@ -44,7 +44,7 @@ describe('EventEmitter', function() {
     describe('#emit()', function() {
         it('should execute listener', function() {
             expect(emitter.listeners.length).to.equal(1);
-            emitter.emit('test', 1234, 5678, 90);
+            emitter.emit('TEST', 1234, 5678, 90);
             expect(listenerResult).to.equal(1234);
         });
     });
