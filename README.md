@@ -23,18 +23,16 @@ npm install --save nomatic-events
 ```javascript
 var events = require("nomatic-events");
 var EventEmitter = events.EventEmitter;
-
 var emitter = new EventEmitter();
 
-// Supports RegExp for listeners
-emitter.on(/incoming/i, function(data) {
+// Supports RegExp for listeners 
+var listener = emitter.on(/incoming/i, function(data) {
   console.log("data is now " + data); 
 });
-// => EventListener
-
-// Executed asynchronously
+// `listener` is an EventListener, but you do not have to capture this.
+ 
+// Executed asynchronously 
 emitter.emit("INCOMING", 42);
-// "data is now 42"
 ```
 
 ### Advanced
@@ -44,7 +42,7 @@ class EventedObject extends EventEmitter {
         // Call EventEmitter, set maxListeners to 20
         super(20);
         
-        this.listenerExecuted = false;
+        this.listenerExecuted = true;
     }
     
     handleIncoming(some, option, or, another) {
@@ -56,17 +54,24 @@ class EventedObject extends EventEmitter {
 let evented = new EventedObject();
 // Don't have to take every argument supplied by `emit`
 evented.on(/IN/, function(some, option, or) {
-    console.log("%s, %s, %s", some, option, or);
-    
-    // Listener is executed in the context of EventedObject
-    this.listenerExecuted = true;
+    console.log(this);
+    if (this.listeners) {
+        console.log(some, option, or);
+        this.listenerExecuted = true;
+    } else {
+        console.log("Bad context");
+    }
 });
 
 evented.handleIncoming("See no evil", "Hear no evil", "Speak no evil", 42);
-// "See no evil, Hear no evil, Speak no evil"
+// "See no evil"
+// "Hear no evil"
+// "Speak no evil"
 ```
 
-See the [test cases](test/unit) for other ways to use this package.
+## Testing
+Pride is taken when developing tests, you can find unit tests for both EventEmitter and EventListener
+[here](test/unit).
 
 ## TypeScript
 This package is written in TypeScript and declaration files are added to the NPM package.
