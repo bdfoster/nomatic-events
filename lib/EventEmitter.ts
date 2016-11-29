@@ -58,16 +58,11 @@ export default class EventEmitter {
         return false;
     }
 
-    public emit(namespace: any, ...data: any[]) {
-        if (!(namespace instanceof RegExp || typeof namespace === 'string' )) {
-            throw new Error("'namespace' param must be of String type");
-        }
-
+    public emit(namespace: string, ...data: any[]) {
         each(this.listeners, function(listener: EventListener) {
-            if (listener.namespace.match(namespace)) {
+            if (namespace.match(listener.namespace)) {
                 listener.execute(this, ...data);
             }
         });
     }
-
 }

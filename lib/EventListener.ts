@@ -20,12 +20,16 @@ export default class EventListener {
         }
 
         this.once = once;
-        this.emitter = emitter;
+        this.emitter = emitter || new EventEmitter();
 
     }
 
     public execute(context: any, ...data: any[]) {
         this.callback.apply(context, data);
+
+        if (this.once) {
+            this.close();
+        }
     }
 
     public close() {

@@ -15,20 +15,19 @@
   },
   "runkitExampleFilename": "examples/runkit.js",
   "scripts": {
-    "compile": "tsc",
+    "compile": "tsc --diagnostics --listEmittedFiles",
     "test": "mocha --recursive test/**/*.test.js",
     "test-gitlab": "NODE_ENV=test npm test",
     "coverage": "nyc npm test",
-    "coverage-gitlab": "NODE_ENV=test npm run coverage"
+    "coverage-gitlab": "cross-env NODE_ENV=test npm run coverage",
+    "codeclimate": "codeclimate-test-reporter < ./coverage/lcov.info",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "engines": {
-    "node": ">=4.0.0",
+    "node": ">=6.0.0",
     "npm": ">=3.0.0"
   },
   "nyc": {
-    "exclude": [
-      "node_modules/"
-    ],
     "extension": [
       ".ts",
       ".tsx"
@@ -38,7 +37,7 @@
     ],
     "reporter": [
       "text-summary",
-      "html"
+      "lcov"
     ],
     "sourceMap": true,
     "instrument": true
