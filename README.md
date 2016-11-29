@@ -56,7 +56,7 @@ class EventedObject extends EventEmitter {
 let evented = new EventedObject();
 // Don't have to take every argument supplied by `emit`
 evented.on(/IN/, function(some, option, or) {
-    console.log("%s, %s, %s, %s", some, option, or);
+    console.log("%s, %s, %s, some, option, or);
     
     // Listener is executed in the context of EventedObject
     this.listenerExecuted = true;
