@@ -26,8 +26,8 @@ deploy:
   email: bdfoster89@gmail.com
   provider: npm
 script:
-- npm run compile
 - npm test
 - npm run coverage
 after_success:
-- npm run codeclimate-test-reporter
+- npm run codeclimate
+- npm run coveralls
