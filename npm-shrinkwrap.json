@@ -1,12 +1,7 @@
 {
   "name": "nomatic-events",
-  "version": "0.2.1",
+  "version": "0.3.4",
   "dependencies": {
-    "async": {
-      "version": "2.1.2",
-      "from": "async@2.1.2",
-      "resolved": "https://registry.npmjs.org/async/-/async-2.1.2.tgz"
-    },
     "lodash": {
       "version": "4.17.2",
       "from": "lodash@4.17.2",
