@@ -5,7 +5,12 @@ describe('EventEmitter', function() {
     var emitter;
     var listener;
     var listenerResult = null;
-    var callback = function(data) { listenerResult = data; };
+    var callback = function(data) {
+        console.log(this);
+        if (this.listeners) {
+            listenerResult = data;
+        }
+    };
 
     beforeEach(function() {
         emitter = new EventEmitter();
@@ -35,7 +40,7 @@ describe('EventEmitter', function() {
         });
 
         it('should return an executable EventListener type', function () {
-            listener.execute('test', true);
+            emitter.emit("TEST", true);
             //noinspection BadExpressionStatementJS,JSUnresolvedVariable
             expect(listenerResult).to.equal(true);
         });
