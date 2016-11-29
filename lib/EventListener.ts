@@ -2,11 +2,11 @@ import EventEmitter from "./EventEmitter";
 
 export default class EventListener {
     public namespace;
-    public callback: Function;
+    public callback;
     private once: boolean;
     private emitter: any;
 
-    constructor(namespace: any, callback: FunctionConstructor, once: boolean = false, emitter: EventEmitter) {
+    constructor(namespace: any, callback: FunctionConstructor, emitter: EventEmitter, once: boolean = false) {
         if (!( namespace instanceof RegExp || typeof namespace === 'string' )) {
             throw new Error("'namespace' param must be of RegExp or String type")
         } else {
@@ -24,19 +24,8 @@ export default class EventListener {
 
     }
 
-    public execute(namespace: string, ...data: any[]) {
-        if (this.namespace.match(namespace)) {
-            this.callback.apply(this, data);
-
-
-            if (this.once) {
-                this.close();
-            }
-
-            return true;
-        }
-
-        return false;
+    public execute(context: any, ...data: any[]) {
+        this.callback.apply(context, data);
     }
 
     public close() {

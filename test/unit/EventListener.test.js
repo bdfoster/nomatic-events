@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var EventListener = require('../../dist/index').EventListener;
+var EventListener = require('../../').EventListener;
 var beforeEach = require("mocha").beforeEach;
 var it = require("mocha").it;
 var describe = require("mocha").describe;
@@ -28,7 +28,7 @@ describe('EventListener', function() {
 
     describe('#execute', function() {
         it('should execute the callback given the event data', function() {
-            listener.execute('test', true);
+            listener.execute(this, true);
             expect(listenerResult).to.equal(true);
         })
     })
