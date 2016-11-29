@@ -15,7 +15,7 @@
   },
   "runkitExampleFilename": "examples/runkit.js",
   "scripts": {
-    "compile": "tsc --diagnostics true --listEmittedFiles true",
+    "compile": "tsc --diagnostics --listEmittedFiles",
     "postinstall": "npm run compile",
     "test": "mocha --recursive test/**/*.test.js",
     "test-gitlab": "NODE_ENV=test npm test",
