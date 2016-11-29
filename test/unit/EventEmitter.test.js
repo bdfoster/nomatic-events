@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var EventEmitter = require('../../dist/index').EventEmitter;
+var EventEmitter = require('../../').EventEmitter;
 
 describe('EventEmitter', function() {
     var emitter;
@@ -44,8 +44,8 @@ describe('EventEmitter', function() {
     describe('#emit()', function() {
         it('should execute listener', function() {
             expect(emitter.listeners.length).to.equal(1);
-            expect(emitter.emit('test', 1234, 5678, 90)).to.equal(true);
-            expect(listenerResult).to.deep.equal([1234, 5678, 90]);
+            emitter.emit('test', 1234, 5678, 90);
+            expect(listenerResult).to.equal(1234);
         });
     });
 
@@ -53,6 +53,7 @@ describe('EventEmitter', function() {
         it('should remove the EventListener object from the EventEmitter', function() {
             expect(emitter.listeners.length).to.equal(1);
             expect(emitter.pop(listener)).to.equal(true);
+            expect(emitter.listeners.length).to.equal(0);
         });
     });
 });
