@@ -16,7 +16,6 @@
   "runkitExampleFilename": "examples/runkit.js",
   "scripts": {
     "compile": "tsc --diagnostics --listEmittedFiles",
-    "postinstall": "npm run compile",
     "test": "mocha --recursive test/**/*.test.js",
     "test-gitlab": "NODE_ENV=test npm test",
     "coverage": "nyc npm test",
@@ -25,7 +24,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "engines": {
-    "node": ">=4.0.0",
+    "node": ">=6.0.0",
     "npm": ">=3.0.0"
   },
   "nyc": {
