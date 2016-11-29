@@ -29,9 +29,6 @@
     "npm": ">=3.0.0"
   },
   "nyc": {
-    "exclude": [
-      "node_modules/"
-    ],
     "extension": [
       ".ts",
       ".tsx"
