@@ -4,7 +4,7 @@ export default class EventListener {
     callback: any;
     private once;
     private emitter;
-    constructor(namespace: any, callback: FunctionConstructor, emitter: EventEmitter, once?: boolean);
+    constructor(namespace: any, callback: Function, emitter: EventEmitter, once?: boolean);
     execute(context: any, ...data: any[]): void;
     close(): this;
     open(once?: boolean): this;
