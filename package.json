@@ -5,7 +5,7 @@
   "description": "Fast, asynchronous, and regex-enabled event framework for Node.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "license": "Apache-2.0",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/bdfoster/nomatic-events"
