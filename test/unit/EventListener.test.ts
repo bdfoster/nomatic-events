@@ -10,7 +10,7 @@ describe('EventListener', function () {
     callback = function (data) {
       listenerResult = data;
     };
-    listener = new EventListener('test', callback);
+    listener = new EventListener('test', callback, null);
   });
 
   describe('new', function () {

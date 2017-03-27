@@ -26,6 +26,7 @@ deploy:
   email: bdfoster89@gmail.com
   provider: npm
 script:
+- npm test
 - npm run coveralls
 - npm run codeclimate
 before_deploy:

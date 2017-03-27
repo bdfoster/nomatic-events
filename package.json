@@ -4,7 +4,6 @@
   "author": "Brian D. Foster <bdfoster89@gmail.com> (https://github.com/bdfoster)",
   "description": "Fast, asynchronous, and regex-enabled event framework for Node.js",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -17,7 +16,7 @@
   "scripts": {
     "build": "tsc --diagnostics --listEmittedFiles",
     "test": "cross-env NODE_ENV=test nyc mocha",
-    "codeclimate": "npm test && nyc report --reporter=text-lcov | codeclimate-test-reporter",
+    "codeclimate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "engines": {
@@ -47,6 +46,8 @@
     "all": true
   },
   "devDependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
     "codeclimate-test-reporter": "^0.4.0",
     "coveralls": "^2.11.15",
@@ -57,7 +58,7 @@
     "typescript": "^2.2.1"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.39",
+    "@types/lodash": "^4.14.58",
     "@types/node": "^7.0.11",
     "lodash": "^4.15.0"
   },

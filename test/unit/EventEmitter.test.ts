@@ -7,7 +7,6 @@ describe('EventEmitter', function () {
   var listener;
   var listenerResult = null;
   var callback = function (data) {
-    console.log(this);
     if (this.listeners) {
       listenerResult = data;
     }
