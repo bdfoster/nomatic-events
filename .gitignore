@@ -39,6 +39,6 @@ jspm_packages
 *.tgz
 .yarn-integrity
 /dist/
-/lib/**/*.js
-/lib/**/*.js.map
-*.d.ts
+/src/**/*.js
+/src/**/*.js.map
+/src/**/*.d.ts
