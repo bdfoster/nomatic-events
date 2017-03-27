@@ -6,9 +6,13 @@ export default class EventListener {
   private once: boolean;
   private emitter: any;
 
-  constructor(namespace: any, callback: Function, emitter: EventEmitter = null, once: boolean = false) {
-    if (!( namespace instanceof RegExp || typeof namespace === 'string' )) {
-      throw new Error("'namespace' param must be of RegExp or String type")
+  constructor(namespace: string | RegExp, callback: Function, emitter: EventEmitter = null, once: boolean = false) {
+    if (!( namespace instanceof RegExp)) {
+      if (typeof namespace === 'string') {
+        this.namespace = new RegExp(namespace);
+      } else {
+        throw new Error("'namespace' param must be of RegExp or String type")
+      }
     } else {
       this.namespace = namespace;
     }

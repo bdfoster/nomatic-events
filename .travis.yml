@@ -30,4 +30,4 @@ script:
 - npm run coveralls
 - npm run codeclimate
 before_deploy:
-- npm run build
+- npm run compile

@@ -12,9 +12,11 @@
   "bugs": {
     "url": "https://github.com/bdfoster/nomatic-events/issues"
   },
-  "runkitExampleFilename": "examples/runkit.js",
   "scripts": {
-    "build": "tsc --diagnostics --listEmittedFiles",
+    "build:src": "tsc --diagnostics --listEmittedFiles",
+    "build:coverage": "nyc report --reporter=html",
+    "build": "npm build:src && npm build:coverage",
+    "compile": "npm run build:src",
     "test": "cross-env NODE_ENV=test nyc mocha",
     "codeclimate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
@@ -23,36 +25,13 @@
     "node": ">=6.0.0",
     "npm": ">=3.0.0"
   },
-  "nyc": {
-    "exclude": [
-      "node_modules",
-      "coverage",
-      "examples",
-      ".nyc_output",
-      ".git",
-      "test",
-      "dist"
-    ],
-    "extension": [
-      ".ts",
-      ".tsx"
-    ],
-    "reporter": [
-      "text-summary",
-      "lcov",
-      "html"
-    ],
-    "sourceMap": true,
-    "instrument": true,
-    "all": true
-  },
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
     "codeclimate-test-reporter": "^0.4.0",
     "coveralls": "^2.11.15",
-    "cross-env": "^3.1.3",
+    "cross-env": "^3.2.4",
     "mocha": "^3.0.2",
     "nyc": "^10.0.0",
     "source-map-support": "^0.4.14",
@@ -60,9 +39,7 @@
     "typescript": "^2.2.1"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.58",
-    "@types/node": "^7.0.11",
-    "lodash": "^4.15.0"
+    "@types/node": "^7.0.11"
   },
   "keywords": [
     "EventEmitter",

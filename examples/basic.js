@@ -8,5 +8,3 @@ emitter.on('incoming', function(data) {
 });
 
 emitter.emit('incoming', 20, 42, 31, 35, 2);
-
-(result === 42);
