@@ -1,8 +1,9 @@
 import {EventListener} from "./index";
 
 export default class EventEmitter {
-  private listeners: Array<EventListener>;
-  private maxListeners: number;
+  private _maxListeners: number = 10;
+
+  public listeners: Array<EventListener> = [];
 
   /**
    *
@@ -12,12 +13,19 @@ export default class EventEmitter {
    *                      limit.
    */
   constructor(maxListeners: number = 10) {
-    // If maxListeners is a negative value, treat as 0 (unlimited)
-    if (maxListeners < 0) {
-      this.maxListeners = 0;
-    }
+    this.maxListeners = maxListeners;
+  }
 
-    this.listeners = [];
+  public get maxListeners() {
+    return this._maxListeners;
+  }
+
+  public set maxListeners(value: number) {
+    if (value < 0) {
+      this._maxListeners = 0;
+    } else {
+      this._maxListeners = value;
+    }
   }
 
   /**
@@ -29,7 +37,7 @@ export default class EventEmitter {
    *              unsubscribe the Listener automatically after the callback is executed once.
    * @returns {EventListener}: Used to manage the subscription status via `open` and `close` methods.
    */
-  public on(namespace: any, callback: Function, once: boolean = false) {
+  public on(namespace: string | RegExp, callback: Function, once: boolean = false) {
     let listener = new EventListener(namespace, callback, this, once);
     this.push(listener);
     return listener;

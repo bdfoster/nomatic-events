@@ -1,28 +1,20 @@
 import EventEmitter from "./EventEmitter";
 
 export default class EventListener {
-  public namespace;
-  public callback;
+  private callback: Function;
   private once: boolean;
-  private emitter: any;
 
-  constructor(namespace: string | RegExp, callback: Function, emitter: EventEmitter = null, once: boolean = false) {
-    if (!( namespace instanceof RegExp)) {
-      if (typeof namespace === 'string') {
-        this.namespace = new RegExp(namespace);
-      } else {
-        throw new Error("'namespace' param must be of RegExp or String type")
-      }
+  public emitter: EventEmitter;
+  public namespace: RegExp;
+
+  constructor(namespace: RegExp | string, callback: Function, emitter: EventEmitter = null, once: boolean = false) {
+    if (!(namespace instanceof RegExp)) {
+      //noinspection TypeScriptValidateTypes
+      this.namespace = new RegExp(namespace);
     } else {
       this.namespace = namespace;
     }
-
-    if (!(callback instanceof Function)) {
-      throw new Error("'callback' param must be a function or method");
-    } else {
-      this.callback = callback;
-    }
-
+    this.callback = callback;
     this.once = once;
 
     if (!emitter) {
@@ -30,7 +22,6 @@ export default class EventListener {
     } else {
       this.emitter = emitter;
     }
-
   }
 
   public execute(context: any, ...data: any[]) {
