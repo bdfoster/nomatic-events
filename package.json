@@ -14,10 +14,8 @@
     "url": "https://github.com/bdfoster/nomatic-events/issues"
   },
   "scripts": {
-    "build:src": "tsc --diagnostics --listEmittedFiles",
-    "build:coverage": "nyc report --reporter=html",
-    "build": "npm build:src && npm build:coverage",
-    "compile": "npm run build:src",
+    "compile": "tsc --diagnostics --listEmittedFiles",
+    "coverage": "nyc report --reporter=html",
     "test": "cross-env NODE_ENV=test nyc mocha",
     "codeclimate": "nyc report --reporter=text-lcov | codeclimate-test-reporter",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
