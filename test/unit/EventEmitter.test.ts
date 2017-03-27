@@ -56,6 +56,18 @@ describe('EventEmitter', function () {
     });
   });
 
+  describe('#once()', () => {
+    it('should only execute the listener once', () => {
+      emitter.once('random2', function(data) { listenerResult = data; });
+      expect(emitter.listeners.length).to.equal(2);
+      emitter.pop(listener);
+      expect(emitter.listeners.length).to.equal(1);
+      emitter.emit('random2', true);
+      expect(listenerResult).to.equal(true);
+      expect(emitter.listeners.length).to.equal(0);
+    });
+  });
+
   describe('#emit()', () => {
     it('should execute listener', () => {
       expect(emitter.listeners.length).to.equal(1);

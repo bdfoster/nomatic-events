@@ -44,6 +44,17 @@ export class EventEmitter {
   }
 
   /**
+   * Subscribe a callable function to a namespace, for exactly one execution.
+   * @param namespace: The namespace to subscribe the callback to.
+   * @param callback: A function taking the event data and namespace as arguments (in that order). The data can be any
+   *                  type, but the namespace will be an array of strings with the index indicating the depth.
+   * @returns {EventListener}: Used to manage the subscription status via `open` and `close` methods.
+   */
+  public once(namespace: string | RegExp, callback: Function) {
+    return this.on(namespace, callback, true);
+  }
+
+  /**
    * Add a Listener instance to the EventNamespace instance. Called with `subscribe` method.
    * @param listener: A Listener instance to add to the EventNamespace instance.
    */
