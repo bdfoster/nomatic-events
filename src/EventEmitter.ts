@@ -1,6 +1,6 @@
-import {EventListener} from "./index";
+import EventListener from "./EventListener";
 
-export default class EventEmitter {
+export class EventEmitter {
   private _maxListeners: number = 10;
 
   public listeners: Array<EventListener> = [];
@@ -73,3 +73,5 @@ export default class EventEmitter {
     }
   }
 }
+
+export default EventEmitter;

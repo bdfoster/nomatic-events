@@ -1,2 +1,2 @@
-export { default as EventEmitter } from "./EventEmitter";
-export { default as EventListener } from "./EventListener";
+export * from "./EventEmitter";
+export * from "./EventListener";

@@ -1,6 +1,6 @@
 import EventEmitter from "./EventEmitter";
 
-export default class EventListener {
+export class EventListener {
   private callback: Function;
   private once: boolean;
 
@@ -43,3 +43,5 @@ export default class EventListener {
     return this;
   }
 }
+
+export default EventListener;

@@ -20,7 +20,9 @@
   ],
   "exclude": [
     "node_modules",
-    "test"
+    "dist",
+    "test",
+    "examples"
   ],
   "compileOnSave": true
 }
