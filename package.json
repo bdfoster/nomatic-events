@@ -27,6 +27,7 @@
     "exclude": [
       "node_modules",
       "coverage",
+      "examples",
       ".nyc_output",
       ".git",
       "test",
