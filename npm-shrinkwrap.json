@@ -1984,7 +1984,7 @@
     },
     "ts-node": {
       "version": "1.7.3",
-      "from": "ts-node@>=1.7.0 <2.0.0",
+      "from": "https://registry.npmjs.org/ts-node/-/ts-node-1.7.3.tgz",
       "resolved": "https://registry.npmjs.org/ts-node/-/ts-node-1.7.3.tgz",
       "dev": true,
       "dependencies": {
