@@ -1,5 +1,7 @@
 # nomatic-events
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bdfoster/nomatic-events.svg)](https://greenkeeper.io/)
+
 [![GitHub release](https://img.shields.io/github/release/bdfoster/nomatic-events.svg)](https://github.com/bdfoster/nomatic-events/releases)
 [![npm](https://img.shields.io/npm/v/nomatic-events.svg)](https://www.npmjs.com/package/nomatic-events)
 [![Build status](https://img.shields.io/travis/bdfoster/nomatic-events/master.svg)](https://travis-ci.org/bdfoster/nomatic-events)
