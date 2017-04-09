@@ -11,36 +11,78 @@ jobs:
   plan:
   - get: repo
     trigger: true
-  - task: npm install
+  - task: cache-repo
     config:
-      image_resource:
-        type: docker-image
-        source:
-          respository: bdfoster/node
-          tag: 'latest'
-      inputs:
-      - name: repo
-      outputs:
-      - name: repo
-      run:
-        path: sh
-        - -exc
-        - |
-          cd repo
-          npm install
-  - task: npm test
-    config:
+      platform: linux
       image_resource:
         type: docker-image
         source:
           repository: bdfoster/node
-          tag: 'latest'
+          tag: latest
       inputs:
       - name: repo
+      outputs:
+      - name: cache
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          cp -R repo/* cache
+
+  - task: npm install
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: bdfoster/node
+          tag: latest
+      inputs:
+      - name: repo
+      outputs:
+      - name: npm-install-cache
       run:
         path: sh
         args:
           - -exc
           - |
-            cd repo
+            cp -R repo/* npm-install-cache
+            cd npm-install-cache
+            npm install
+
+  - task: npm run compile
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: bdfoster/node
+          tag: latest
+      inputs:
+      - name: npm-install-cache
+        path: '.'
+      run:
+        path: sh
+        args:
+          - -exc
+          - |
+            npm run compile
+
+  - task: npm test
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: bdfoster/node
+          tag: latest
+      inputs:
+      - name: npm-install-cache
+        path: '.'
+      run:
+        path: sh
+        args:
+          - -exc
+          - |
             npm test
