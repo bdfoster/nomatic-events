@@ -5,10 +5,13 @@ resources:
     uri: https://github.com/bdfoster/nomatic-events.git
  
 jobs:
-- name: compile
+- name: test
+  public: true
+  serial: true
   plan:
   - get: repo
-  - task: npm-compile
+    trigger: true
+  - task: npm install
     config:
       image_resource:
         type: docker-image
@@ -17,20 +20,15 @@ jobs:
           tag: 'latest'
       inputs:
       - name: repo
+      outputs:
+      - name: repo
       run:
         path: sh
         - -exc
         - |
           cd repo
-          npm run compile
-
-- name: test
-  plan:
-  - get: repo
-    trigger: true
-    passed:
-    - compile
-  - task: test
+          npm install
+  - task: npm test
     config:
       image_resource:
         type: docker-image
@@ -45,5 +43,4 @@ jobs:
           - -exc
           - |
             cd repo
-            npm install
             npm test
