@@ -4,8 +4,9 @@
 [![npm](https://img.shields.io/npm/v/nomatic-events.svg)](https://www.npmjs.com/package/nomatic-events)
 [![Build Status](https://img.shields.io/travis/bdfoster/nomatic-events/master.svg)](https://travis-ci.org/bdfoster/nomatic-events)
 [![Coverage Status](https://img.shields.io/coveralls/bdfoster/nomatic-events/master.svg)](https://coveralls.io/github/bdfoster/nomatic-events)
-[![David dependencies](https://img.shields.io/david/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events)
-[![David devDependencies](https://img.shields.io/david/dev/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events?type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/bdfoster/nomatic-events/badge.svg)](https://snyk.io/test/github/bdfoster/nomatic-events)
+[![dependencies Status](https://img.shields.io/david/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events)
+[![devDependencies Status](https://img.shields.io/david/dev/bdfoster/nomatic-events.svg)](https://david-dm.org/bdfoster/nomatic-events?type=dev)
 [![License](https://img.shields.io/github/license/bdfoster/nomatic-events.svg)](https://github.com/bdfoster/nomatic-events/blob/master/LICENSE)
 
 ## Installation
