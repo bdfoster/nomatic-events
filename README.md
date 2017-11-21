@@ -31,7 +31,6 @@ var listener = emitter.on(/incoming/i, function(data) {
 });
 // `listener` is an EventListener, but you do not have to capture this.
  
-// Executed asynchronously 
 emitter.emit("INCOMING", 42);
 ```
 
@@ -67,6 +66,34 @@ evented.handleIncoming("See no evil", "Hear no evil", "Speak no evil", 42);
 // "See no evil"
 // "Hear no evil"
 // "Speak no evil"
+```
+
+## Async
+You can also use `AsyncEventEmitter` and `AsyncEventListener` to handle Promise-based callbacks.
+### Example
+```javascript
+var events = require("nomatic-events");
+var AsyncEventEmitter = events.AsyncEventEmitter;
+var emitter = new AsyncEventEmitter();
+var fs = require('fs');
+var files = null;
+var listener = emitter.on(/incoming/i, function(data) {
+    return new Promise((resolve, reject) => {
+        fs.readdir(__dirname, (err, list) => {
+            if (err) reject(err);
+            files = list;
+            resolve();
+        });
+    })
+});
+// `listener` is an AsyncEventListener, but you do not have to capture this.
+ 
+// Executed asynchronously 
+emitter.emit("INCOMING", 42).then(() => {
+    // 'files' isn't null!
+    console.log(files);
+});
+// 'files' will still be null until promise resolves
 ```
 
 ## Testing
