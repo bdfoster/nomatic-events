@@ -1,6 +1,6 @@
 import 'mocha';
 import {expect} from 'chai';
-import {AsyncEventEmitter, AsyncEventListener} from '../../src';
+import {AsyncEventEmitter} from '../../src';
 import * as fs from 'fs';
 
 describe('AsyncEventEmitter', () => {
