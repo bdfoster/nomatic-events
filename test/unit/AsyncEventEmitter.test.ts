@@ -1,23 +1,31 @@
 import 'mocha';
 import {expect} from 'chai';
 import {AsyncEventEmitter} from '../../src';
-import * as fs from 'fs';
 
 describe('AsyncEventEmitter', () => {
     let listenerResult;
     let emitter: AsyncEventEmitter;
     const callback = (data) => {
         return new Promise((resolve) => {
-            fs.readdir(__dirname, () => {
-                listenerResult = data;
+            setTimeout(() => {
+                listenerResult = data - 1;
                 resolve();
-            });
+            }, 500);
         })
     };
     beforeEach(function () {
         listenerResult = null;
         emitter = new AsyncEventEmitter();
         emitter.on('test', callback);
+        emitter.on('test', (data) => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    expect(listenerResult).to.equal(data - 1);
+                    listenerResult += 1;
+                    resolve();
+                }, 700);
+            });
+        });
     });
     describe('#emit()', () => {
         it('should execute Promise instance', () => {
