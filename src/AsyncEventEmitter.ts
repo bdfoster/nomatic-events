@@ -1,5 +1,5 @@
-import EventEmitter from './EventEmitter';
 import AsyncEventListener from './AsyncEventListener';
+import EventEmitter from './EventEmitter';
 
 export class AsyncEventEmitter extends EventEmitter {
     public async emit(namespace: string, ...data: any[]) {
@@ -11,7 +11,7 @@ export class AsyncEventEmitter extends EventEmitter {
     }
 
     public on(namespace: string | RegExp, callback: Function, once: boolean = false) {
-        let listener = new AsyncEventListener(namespace, callback, this, once);
+        const listener = new AsyncEventListener(namespace, callback, this, once);
         this.push(listener);
         return listener;
     }

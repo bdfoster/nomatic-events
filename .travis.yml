@@ -27,4 +27,4 @@ script:
 - npm test
 - npm run coveralls
 before_deploy:
-- npm run compile
+- npm run build

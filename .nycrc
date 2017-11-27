@@ -19,6 +19,7 @@
     ".tsx"
   ],
   "reporter": [
+    "html",
     "text-summary"
   ],
   "produce-source-map": true,
