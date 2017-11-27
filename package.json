@@ -1,6 +1,6 @@
 {
   "name": "nomatic-events",
-  "version": "2.2.1",
+  "version": "0.0.0-development",
   "author": "Brian D. Foster <bdfoster89@gmail.com> (https://github.com/bdfoster)",
   "description": "Fast, asynchronous, and regex-enabled event framework for Node.js",
   "main": "src/index.js",
@@ -19,7 +19,8 @@
     "lint": "tslint -c tslint.json --project tsconfig.json",
     "lint:fix": "npm run lint -- --fix",
     "test": "rm -rf coverage/ && cross-env NODE_ENV=test nyc mocha --reporter spec --exit --recursive test/**/*.test.ts",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
     "node": ">=6.0.0",
@@ -36,7 +37,8 @@
     "source-map-support": "^0.5.0",
     "ts-node": "^3.0.1",
     "tslint": "^5.8.0",
-    "typescript": "^2.2.1"
+    "typescript": "^2.6.2",
+    "semantic-release": "^8.2.0"
   },
   "dependencies": {
     "@types/node": "^8.0.0"
