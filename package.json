@@ -35,7 +35,7 @@
     "mocha": "^6.1.2",
     "nyc": "^13.3.0",
     "source-map-support": "^0.5.0",
-    "ts-node": "^8.0.3",
+    "ts-node": "^8.5.4",
     "tslint": "^5.8.0",
     "typescript": "^3.4.3",
     "semantic-release": "^15.13.3"
