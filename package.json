@@ -38,7 +38,7 @@
     "ts-node": "^8.0.3",
     "tslint": "^5.8.0",
     "typescript": "^3.4.3",
-    "semantic-release": "^15.13.3"
+    "semantic-release": "^16.0.0"
   },
   "dependencies": {
     "@types/node": "^11.13.2"
